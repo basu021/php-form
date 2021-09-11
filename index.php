@@ -1,7 +1,7 @@
 <?php
-
+    $insert = false;
     if(isset($_POST['name'])){
-
+    
     $server="localhost";
     $username="root";
     $password="";
@@ -22,7 +22,8 @@
     //echo $sql;
 
     if($connection->query($sql) == true) {
-        echo "Successfully inserted trip";
+        //echo "Successfully inserted trip";
+        $insert = true;
     }
     else {
         echo "Error: $sql <br> $connection->error";
@@ -46,7 +47,11 @@
     <div class="cont">
         <h3>Welcome to GPBBSR</h3>
         <p>Fillup the form for comform your participation</p>
-        <p class="submsg" style="color:rgb(0, 128, 0); font-weight:bold;">Thanks For submitting your form</p>
+        <?php
+        if($insert == true) {
+        echo "<p class='submsg' style='color:rgb(0, 128, 0); font-weight:bold;'>Thanks For submitting your form</p>";
+        }
+?> 
         <form action="index.php" method="post">
             <input type="text" name="name" id="name" placeholder="Full name" required>
             <input type="text" name="email" id="email" placeholder="Email" required>
