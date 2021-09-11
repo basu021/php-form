@@ -1,17 +1,19 @@
 <?php
     $insert = false;
     if(isset($_POST['name'])){
-    
+    //connection variables
     $server="localhost";
     $username="root";
     $password="";
-
+    //create connection
     $connection = mysqli_connect($server,$username,$password);
 
     if (!$connection) {
         die("Could not connect to database" . mysqli_connect_error());
     }
     //echo "Connection established";
+        
+    //collect post variables
     $email = $_POST['email']?? "";
     $name = $_POST['name']?? "";
     $gend= $_POST['gender']?? "";
@@ -21,14 +23,18 @@
     $sql = "INSERT INTO `trip`.`trip` ( `name`, `email`, `gender`, `age`, `msg`) VALUES ( '$name', '$email', '$gend', '$age', '$desc');";
     //echo $sql;
 
+    //Execute tthe query
     if($connection->query($sql) == true) {
         //echo "Successfully inserted trip";
+        
+        //flag for successful insertion
         $insert = true;
     }
     else {
         echo "Error: $sql <br> $connection->error";
     }
-
+    
+    //close connection
     $connection->close();
 }
 ?>
